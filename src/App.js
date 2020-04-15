@@ -23,8 +23,8 @@ class App extends Component {
       <div className="App">
         <div className="header">
         <h1 className="title">Welcome to BrainHive!</h1>
-        <div/>
-        <div classname="resourceList">{this.renderPosts()}<div/>
+        </div>
+        <div classname="resourceList">{this.renderPosts()}</div>
       </div>
     );
   }
