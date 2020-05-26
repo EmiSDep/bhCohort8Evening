@@ -35,7 +35,7 @@ class ViewCourse extends Component {
             <p>{course.summary}</p>
             <p>{course.link}</p>
             <Button onClick={this.handleClick}
-            buttonStyle={{ backgroundColor: "green"}}>
+            buttonStyle={{ backgroundColor: "black"}}>
                 {this.state.showComments ? "Hide Comments" : "Show Comments"}
             </Button>
             {this.state.showComments ? 
