@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {connect} from "react-redux";
 import Resource from "./Resource"
 
 class ResourceList extends Component {
@@ -76,4 +77,6 @@ const myStyles = {
   },
 };
 
-export default ResourceList;
+
+
+export default connect()(ResourceList);
