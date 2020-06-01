@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import Resource from "./Resource"
+import { increment } from '../actions'
+import Resource from "./Resource";
 
 class ResourceList extends Component {
   state = {
@@ -77,6 +78,14 @@ const myStyles = {
   },
 };
 
+const mapStoreToProps = store => {
+  return {
+    count: store.resources.count
+  }
+}
 
 
-export default connect()(ResourceList);
+
+export default connect(mapStoreToProps, {
+  increment,
+})(ResourceList);
