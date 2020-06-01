@@ -42,7 +42,7 @@ class App extends Component {
           <Navbar />
           <Switch>
             <Route exact path="/">
-              <ResourceList resources={this.state.resources} onSelect={this.handleSelect} />
+              <ResourceList onSelect={this.handleSelect} />
             </Route>
             <Route path="/addResource">
               <ResourceForm addResource={this.addResource} />
