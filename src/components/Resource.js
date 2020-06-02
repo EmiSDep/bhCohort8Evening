@@ -7,8 +7,7 @@ class Resource extends Component {
     };
 
     handleClick = () => {
-        const { resource, onSelect } = this.props;
-        onSelect(resource.id);
+        const { resource } = this.props;
         this.setState({
             clicked: true,
         });
