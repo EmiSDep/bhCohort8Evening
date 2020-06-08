@@ -1,65 +1,45 @@
-import React, {Component} from "react";
-import {connect} from "react-redux";
-import { increment } from '../actions'
+import React from "react";
+import { connect } from "react-redux";
+import { increment, changeQuery } from "../actions";
 import Resource from "./Resource";
 
-class ResourceList extends Component {
-  state = {
-    query: "",
-    searchedResources: [...this.props.resources.list],
+
+const ResourceList = (props) => {
+
+  const handleChange = (e) => {
+    props.changeQuery(e.target.value, props.resources.list)
   };
 
-  handleChange = (e) => {
-    const query = e.target.value;
-    const newList = this.props.resources.list.filter(
-      (resource) => {
-        const index = resource.title.toLowerCase().indexOf(query.toLowerCase());
-        if (index >= 0) {
-          return true;
-        }
-        return false;
-      }
-      // resource.title.toLowerCase().indexOf(query.toLowerCase()) >= 0 ||
-      // resource.summary.toLowerCase().indexOf(query.toLowerCase()) >= 0
-    );
-
-    this.setState({
-      query,
-      searchedResources: newList,
-    });
+  const handleClick = () => {
+    props.increment(props.count);
   };
 
-  handleClick = () => {
-    this.props.increment(this.props.count);
-  };
-
-  renderPosts = () => {
-    const display = this.state.searchedResources.map((resource) => {
+  const renderPosts = () => {
+    const display = props.search.list.map((resource) => {
       return <Resource resource={resource} key={resource.id} />;
     });
 
     return display;
   };
 
-  render() {
-    return (
-      <div>
-        <div style={myStyles.searchBar}>
-          <input
-            style={myStyles.input}
-            type="text"
-            placeholder="🔍 Search Titles"
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="resourceList">{this.renderPosts()}</div>
-        <div>
-          <button onClick={this.handleClick}>add</button>
-          <p>{this.props.count}</p>
-        </div>
+  return (
+    <div>
+      <div style={myStyles.searchBar}>
+        <input
+          style={myStyles.input}
+          type="text"
+          placeholder="🔍 Search Titles"
+          value={props.search.query}
+          onChange={handleChange}
+        />
       </div>
-    );
-  }
+      <div className="resourceList">{renderPosts()}</div>
+      <div>
+        <button onClick={handleClick}>add</button>
+        <p>{props.count}</p>
+      </div>
+    </div>
+  );
 }
 
 const myStyles = {
@@ -78,15 +58,15 @@ const myStyles = {
   },
 };
 
-const mapStoreToProps = store => {
+const mapStoreToProps = (store) => {
   return {
     count: store.resources.count,
     resources: store.resources,
-  }
-}
-
-
+    search: store.search
+  };
+};
 
 export default connect(mapStoreToProps, {
   increment,
+  changeQuery
 })(ResourceList);
